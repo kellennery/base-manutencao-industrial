@@ -1,0 +1,39 @@
+﻿<!-- Modal Bootstrap -->
+<div class="modal fade" id="mensagemModal" tabindex="-1" aria-labelledby="mensagemModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mensagemModalLabel">Mensagem</h5>
+            </div>
+            <div class="modal-body">
+                <p id="mensagemConteudo"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="okButton">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var mensagem = "@Html.Raw(TempData["Mensagem"])"; 
+            var sucesso = "@TempData["Sucesso"]";
+
+            if (mensagem) {
+                // Definir o conteúdo da mensagem
+                document.getElementById("mensagemConteudo").textContent = mensagem;
+
+                // Mostrar o modal
+                var myModal = new bootstrap.Modal(document.getElementById('mensagemModal'));
+                myModal.show();
+
+                // Redirecionar ao clicar no botão OK
+                document.getElementById("okButton").addEventListener("click", function () {
+                    window.location.href = '@Url.Action("Index", "ListaOS")';
+                });
+            }
+        });
+    </script>
+}
